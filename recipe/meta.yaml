@@ -1,6 +1,5 @@
 {% set name = "pytest-sugar" %}
-{% set version = "0.9.6" %}
-
+{% set version = "0.9.7" %}
 
 package:
   name: {{ name|lower }}
@@ -8,22 +7,25 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: c4793495f3c32e114f0f5416290946c316eb96ad5a3684dcdadda9267e59b2b8
+  sha256: f1e74c1abfa55f7241cf7088032b6e378566f16b938f3f08905e2cf4494edd46
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: True  #[py<38]
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
+    - poetry-core
+    - setuptools >=40.6.0
+    - wheel
   run:
-    - python >=3.6
-    - packaging >=14.1
-    - pytest >=2.9
-    - termcolor >=1.1.0
+    - python
+    - packaging >=21.3
+    - pytest >=6.2.0
+    - termcolor >=2.1.0
 
 test:
   imports:
@@ -34,15 +36,16 @@ test:
     - pip
 
 about:
-  home: http://pivotfinland.com/pytest-sugar/
+  home: https://github.com/Teemu/pytest-sugar
+  dev_url: https://github.com/Teemu/pytest-sugar/
+  doc_url: https://github.com/Teemu/pytest-sugar/tree/main#readme
+  summary: Pytest plugin that adds a progress bar and other visual enhancements
+  description: |
+    pytest-sugar is a plugin for pytest that changes the default look and feel of pytest
+    (e.g. progressbar, show tests that fail instantly).
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary: 'a plugin for py.test that changes the default look and feel of py.test '
-  description: |
-    pytest-sugar is a plugin for py.test that shows failures and errors instantly and
-    shows a progress bar.
-  dev_url: https://github.com/Teemu/pytest-sugar/
 
 extra:
   recipe-maintainers:
