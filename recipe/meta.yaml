@@ -1,13 +1,13 @@
 {% set name = "pytest-sugar" %}
-{% set version = "0.9.7" %}
+{% set version = "1.1.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f1e74c1abfa55f7241cf7088032b6e378566f16b938f3f08905e2cf4494edd46
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 73b8b65163ebf10f9f671efab9eed3d56f20d2ca68bda83fa64740a92c08f65d
 
 build:
   number: 0
@@ -19,6 +19,7 @@ requirements:
     - python
     - pip
     - setuptools >=40.6.0
+    - poetry-core
     - wheel
   run:
     - python
@@ -27,16 +28,21 @@ requirements:
     - termcolor >=2.1.0
 
 test:
+  source_files:
+    - pyproject.toml
+    - test_sugar.py
   imports:
     - pytest_sugar
   commands:
     - pip check
+    - pytest -v
   requires:
     - pip
+    - pytest
 
 about:
   home: https://github.com/Teemu/pytest-sugar
-  dev_url: https://github.com/Teemu/pytest-sugar/
+  dev_url: https://github.com/Teemu/pytest-sugar
   doc_url: https://github.com/Teemu/pytest-sugar/tree/main#readme
   summary: Pytest plugin that adds a progress bar and other visual enhancements
   description: |
