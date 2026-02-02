@@ -10,7 +10,7 @@ source:
   sha256: 73b8b65163ebf10f9f671efab9eed3d56f20d2ca68bda83fa64740a92c08f65d
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: True  #[py<38]
 
@@ -24,7 +24,11 @@ requirements:
   run:
     - python
     - packaging >=21.3
-    - pytest >=6.2.0
+    # Package uses hook which is removed in pytest>=9
+    # https://docs.pytest.org/en/latest/deprecations.html#py-path-local-arguments-for-hooks-replaced-with-pathlib-path
+    # !! Important: Support for pytest>=9 will be added in next release !!
+    # https://github.com/Teemu/pytest-sugar/pull/301
+    - pytest >=6.2.0,<9
     - termcolor >=2.1.0
 
 test:
