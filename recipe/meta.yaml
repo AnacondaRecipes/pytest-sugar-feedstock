@@ -24,8 +24,8 @@ requirements:
   run:
     - python
     - packaging >=21.3
-    - pytest >=6.2.0
     - termcolor >=2.1.0
+    - pytest >=6.2.5
 
 test:
   source_files:
@@ -38,7 +38,8 @@ test:
     - pytest -v
   requires:
     - pip
-    - pytest
+    # https://github.com/Teemu/pytest-sugar/blob/v1.1.1/tox.ini#L10
+    - pytest >=6.2.5,<7.0.0
 
 about:
   home: https://github.com/Teemu/pytest-sugar
