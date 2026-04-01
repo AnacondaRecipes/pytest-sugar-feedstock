@@ -12,7 +12,7 @@ source:
 build:
   number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: True  #[py<38]
+  skip: true  #[py<38]
 
 requirements:
   host:
@@ -21,6 +21,7 @@ requirements:
     - setuptools >=40.6.0
     - poetry-core
     - wheel
+    - poetry-core
   run:
     - python
     - packaging >=21.3
